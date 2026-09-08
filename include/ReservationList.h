@@ -23,6 +23,5 @@ public:
     void displayReservationList();
     bool validateRequest(string resourceId);
     ~ReservationList();
-
 };
 #endif

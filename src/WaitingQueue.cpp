@@ -6,6 +6,11 @@ bool WaitingQueue::isEmpty(){
     return size == 0;
 }
 void WaitingQueue :: addToWaitingList(string studentId, string resourceId, string timestamp){
+    WaitingRequest* newNode = new WaitingRequest;
+    newNode->studentId = studentId;
+    newNode->resourceId = resourceId;
+    newNode->timestamp = timestamp;
+    newNode->next = nullptr;
 
 }
 void WaitingQueue::removeFromWaitingList(){
