@@ -16,6 +16,7 @@ private:
     CancellationRequest* top = nullptr;
     int size = 0;
 public:
+    bool isEmpty();
     void storeCancellation(string studentId, string resourceId, string timestamp, string reservationId);
     CancellationRequest restoreLastCancellation();
     void displayHistory();
