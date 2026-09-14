@@ -53,7 +53,8 @@ void WaitingQueue::displayWaitingList(){
     }
     WaitingRequest* current = front;
     while(current != nullptr){
-        cout << current->studentId << "|" << current->resourceId << "|" << current->timestamp << endl;
+        cout << "[" << current->studentId << "] Room: " << current->resourceId 
+             << " | Requested: " << current->timestamp << endl;
         current = current->next;
     }
 }
