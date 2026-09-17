@@ -8,16 +8,20 @@ Reservation::Reservation()
   studentID = 0;
   studentName = "";
   resourceID = "";
-  reservationDate = "";
+  date = "";
+  startTime = "";
+  endTime = "";
 }
 
-Reservation::Reservation(int reservationID, int studentID, string studentName, string resourceID, string reservationDate)
+Reservation::Reservation(int reservationID, int studentID, string studentName, string resourceID, string date, string startTime, string endTime)
 {
   this->reservationID = reservationID;
   this->studentID = studentID;
   this->studentName = studentName;
   this->resourceID = resourceID;
-  this->reservationDate = reservationDate;
+  this->date = date;
+  this->startTime = startTime;
+  this->endTime = endTime;
 }
 
 int Reservation::getReservationID() const
@@ -40,10 +44,19 @@ string Reservation::getResourceID() const
   return resourceID;
 }
 
-string Reservation::getReservationDate() const
+string Reservation::getDate() const
 {
-  return reservationDate;
+  return date;
 }
+string Reservation::getStartTime() const
+{
+  return startTime;
+}
+string Reservation::getEndTime() const
+{
+  return endTime;
+}
+
 
 void Reservation::displayReservation() const
 {
@@ -51,5 +64,5 @@ void Reservation::displayReservation() const
   cout<< "Student ID: " << studentID << endl;
   cout<< "Student Name: " << studentName << endl;
   cout<< "Resource ID: " << resourceID << endl;
-  cout<< "Reservation Date: " << reservationDate << endl;
+  cout<< "Reservation Date: " << date << " | " << startTime << " | " << endTime << endl;
 }

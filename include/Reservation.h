@@ -9,18 +9,22 @@ private:
     int studentID;
     string studentName;
     string resourceID;
-    string reservationDate;
+    string date;
+    string startTime;
+    string endTime;
 
 public:
     Reservation(); 
 
-    Reservation(int reservationID, int studentID, string studentName, stirng resoureID, string reservationDate);
+    Reservation(int reservationID, int studentID, string studentName, string resourceID, string date, string startTime, string endTime);
 
     int getReservationID() const;
     int getStudentID() const;
     string getStudentName() const;
     string getResourceID() const;
-    string getReservationDate() const;
+    string getDate() const;
+    string getStartTime() const;
+    string getEndTime() const;
 
     void displayReservation() const;
 };
