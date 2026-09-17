@@ -5,10 +5,10 @@ using namespace std;
 bool WaitingQueue::isEmpty(){
     return size == 0;
 }
-void WaitingQueue::addToWaitingList(string studentId, string resourceId, string timestamp){
+void WaitingQueue::addToWaitingList(int studentID, string resourceID, string timestamp){
     WaitingRequest* newNode = new WaitingRequest;
-    newNode->studentId = studentId;
-    newNode->resourceId = resourceId;
+    newNode->studentID = studentID;
+    newNode->resourceID = resourceID;
     newNode->timestamp = timestamp;
     newNode->next = nullptr;
     if(isEmpty()){
@@ -24,16 +24,16 @@ void WaitingQueue::addToWaitingList(string studentId, string resourceId, string 
 WaitingRequest WaitingQueue::removeFromWaitingList(){
     if(isEmpty()){
         WaitingRequest empty;
-        empty.studentId = "";
-        empty.resourceId = "";
+        empty.studentID = -1;
+        empty.resourceID = "";
         empty.timestamp = "";
         empty.next = nullptr;
         return empty;
     }
     WaitingRequest* temp = front;
     WaitingRequest removed;
-    removed.studentId = temp->studentId;
-    removed.resourceId = temp->resourceId;
+    removed.studentID = temp->studentID;
+    removed.resourceID = temp->resourceID;
     removed.timestamp = temp->timestamp;
     removed.next = nullptr;
     front = front->next;
@@ -53,7 +53,7 @@ void WaitingQueue::displayWaitingList(){
     }
     WaitingRequest* current = front;
     while(current != nullptr){
-        cout << "[" << current->studentId << "] Room: " << current->resourceId 
+        cout << "[" << current->studentID << "] Room: " << current->resourceID 
              << " | Requested: " << current->timestamp << endl;
         current = current->next;
     }

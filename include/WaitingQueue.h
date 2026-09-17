@@ -4,8 +4,8 @@
 using namespace std;
 
 struct WaitingRequest {
-    string studentId;
-    string resourceId;
+    int studentID;
+    string resourceID;
     string timestamp;
     WaitingRequest* next;
 };
@@ -16,7 +16,7 @@ private:
     int size = 0;
     
 public:
-    void addToWaitingList(string studentId, string resourceId, string timestamp);
+    void addToWaitingList(int studentID, string resourceID, string timestamp);
     WaitingRequest removeFromWaitingList();
     void displayWaitingList();
     bool isEmpty();
