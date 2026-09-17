@@ -4,10 +4,13 @@
 using namespace std;
 
 struct CancellationRequest{
-    string studentId;
-    string resourceId;
-    string timestamp;
-    string reservationId;
+    int studentID;
+    string studentName;
+    string resourceID;
+    int reservationID;
+    string date;
+    string startTime;
+    string endTime;
     CancellationRequest* next;
 
 };
@@ -17,7 +20,7 @@ private:
     int size = 0;
 public:
     bool isEmpty();
-    void storeCancellation(string studentId, string resourceId, string timestamp, string reservationId);
+    void storeCancellation(int studentID, string studentName, string resourceID, int reservationID, string date, string startTime, string endTime);
     CancellationRequest restoreLastCancellation();
     void displayHistory();
     ~CancellationHistory();

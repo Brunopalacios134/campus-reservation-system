@@ -6,12 +6,15 @@ using namespace std;
 bool CancellationHistory::isEmpty(){
     return top == nullptr;
 }
-void CancellationHistory::storeCancellation(string studentId, string resourceId, string timestamp, string reservationId){
+void CancellationHistory::storeCancellation(int studentID, string studentName, string resourceID, int reservationID, string date, string startTime, string endTime){
     CancellationRequest* newNode = new CancellationRequest;
-    newNode->studentId = studentId;
-    newNode->resourceId = resourceId;
-    newNode->timestamp = timestamp;
-    newNode->reservationId = reservationId;
+    newNode->studentID = studentID;
+    newNode->studentName = studentName;
+    newNode->resourceID = resourceID;
+    newNode->date = date;
+    newNode->startTime = startTime;
+    newNode->endTime = endTime;
+    newNode->reservationID = reservationID;
     newNode->next = top;
     top = newNode;
     size = size + 1;
@@ -19,10 +22,13 @@ void CancellationHistory::storeCancellation(string studentId, string resourceId,
 CancellationRequest CancellationHistory::restoreLastCancellation(){
     if(isEmpty()){
         CancellationRequest empty;
-        empty.studentId = "";
-        empty.resourceId = "";
-        empty.timestamp = "";
-        empty.reservationId= "";
+        empty.studentID = -1;
+        empty.studentName = "";
+        empty.resourceID = "";
+        empty.date = "";
+        empty.startTime = "";
+        empty.endTime = "";
+        empty.reservationID = -1;
         empty.next = nullptr;
         return empty;
     }
@@ -40,9 +46,9 @@ void CancellationHistory::displayHistory(){
     }
     CancellationRequest* current = top;
     while(current != nullptr){
-        cout << "[" << current->studentId << "] Room: " << current->resourceId 
-             << " | Reservation ID: " << current->reservationId 
-             << " | Cancelled at: " << current->timestamp << endl;
+        cout << "[" << current->studentID << "] Room: " << current->resourceID
+     << " | Reservation ID: " << current->reservationID 
+     << " | Cancelled at: " << current->date << " | Start time: " << current->startTime << " | End time: " << current->endTime << endl;
         current = current->next;
     }
 }
