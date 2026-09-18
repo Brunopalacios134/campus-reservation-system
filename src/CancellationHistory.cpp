@@ -6,14 +6,12 @@ using namespace std;
 bool CancellationHistory::isEmpty(){
     return top == nullptr;
 }
-void CancellationHistory::storeCancellation(int studentID, string studentName, string resourceID, int reservationID, string date, string startTime, string endTime){
+void CancellationHistory::storeCancellation(int studentID, string studentName, string resourceID, int reservationID, string date){
     CancellationRequest* newNode = new CancellationRequest;
     newNode->studentID = studentID;
     newNode->studentName = studentName;
     newNode->resourceID = resourceID;
     newNode->date = date;
-    newNode->startTime = startTime;
-    newNode->endTime = endTime;
     newNode->reservationID = reservationID;
     newNode->next = top;
     top = newNode;
@@ -26,8 +24,6 @@ CancellationRequest CancellationHistory::restoreLastCancellation(){
         empty.studentName = "";
         empty.resourceID = "";
         empty.date = "";
-        empty.startTime = "";
-        empty.endTime = "";
         empty.reservationID = -1;
         empty.next = nullptr;
         return empty;
@@ -48,7 +44,7 @@ void CancellationHistory::displayHistory(){
     while(current != nullptr){
         cout << "[" << current->studentID << "] Room: " << current->resourceID
      << " | Reservation ID: " << current->reservationID 
-     << " | Cancelled at: " << current->date << " | Start time: " << current->startTime << " | End time: " << current->endTime << endl;
+     << " | Cancelled at: " << current->date << endl;
         current = current->next;
     }
 }

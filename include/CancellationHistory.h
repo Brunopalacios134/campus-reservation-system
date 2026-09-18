@@ -9,8 +9,6 @@ struct CancellationRequest{
     string resourceID;
     int reservationID;
     string date;
-    string startTime;
-    string endTime;
     CancellationRequest* next;
 
 };
@@ -20,7 +18,7 @@ private:
     int size = 0;
 public:
     bool isEmpty();
-    void storeCancellation(int studentID, string studentName, string resourceID, int reservationID, string date, string startTime, string endTime);
+    void storeCancellation(int studentID, string studentName, string resourceID, int reservationID, string date);
     CancellationRequest restoreLastCancellation();
     void displayHistory();
     ~CancellationHistory();
