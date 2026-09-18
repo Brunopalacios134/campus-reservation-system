@@ -30,10 +30,10 @@ bool ResourceManager::loadFromFile(string filename) {
         string type;
         string status;
 
-        getline(ss, id, ',');
-        getline(ss, name, ',');
-        getline(ss, type, ',');
-        getline(ss, status, ',');
+        getline(ss, id, '|');
+        getline(ss, name, '|');
+        getline(ss, type, '|');
+        getline(ss, status, '|');
 
         bool available =
             (status == "Available");
