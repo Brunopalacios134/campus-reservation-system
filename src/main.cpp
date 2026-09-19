@@ -6,6 +6,7 @@
 #include "Reservationlist.h"
 #include "WaitingQueue.h"
 #include "CancellationHistory.h"
+#include "ReservationManager.h"
 using namespace std;
     int main(){
         int choice, sortChoice;
@@ -13,6 +14,7 @@ using namespace std;
         ReservationList reservationList;
         WaitingQueue waitingQueue;
         CancellationHistory cancellationHistory;
+        ReservationManager reservationManager(reservationList, resourceManager, waitingQueue, cancellationHistory);
 resourceManager.loadFromFile("data/resources.txt"); 
         do{
             cout << "===== Campus Resource Reservation System =====" << endl;
@@ -39,18 +41,38 @@ resourceManager.loadFromFile("data/resources.txt");
                     cout << "Displaying available resources..." << endl;
                     resourceManager.displayAll();
                     break;
-                case 2:
+                case 2:{
                     cout << "Opening reservation form..." << endl;
+                    int newReservationID, newStudentID;
+                    string newStudentName, newResourceID, newDate;
+                    cout << "Enter Reservation ID: ";
+                    cin >> newReservationID;
+                    cout << "Enter Student ID: ";
+                    cin >> newStudentID;
+                    cin.ignore(); 
+                    cout << "Enter Student Name: ";
+                    getline(cin, newStudentName);
+                    cout << "Enter Resource ID: ";
+                    cin >> newResourceID;
+                    cout << "Enter Date: ";
+                    cin >> newDate;
+                    reservationManager.createReservation(newReservationID, newStudentID, newStudentName, newResourceID, newDate);
                     break;
-                case 3:
+                }
+                case 3: {
+                    int idToCancel;
+                    cout << "Enter Reservation ID to cancel: ";
+                    cin >> idToCancel;
+                    reservationManager.cancelReservation(idToCancel);
                     cout << "Canceling reservation..." << endl;
-
                     break;
+                }
                 case 4:
                     cout << "Loading waiting list..." << endl;
                     waitingQueue.displayWaitingList();
                     break;
                 case 5:
+                    reservationManager.undoCancellation();
                     cout << "Undoing last cancellation..." << endl;
                     break;
                 case 6:
