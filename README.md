@@ -7,43 +7,42 @@ A comprehensive C++ application for managing university resource reservations, b
 This system manages campus resources including study rooms, laptops, calculators, lab equipment, and tutoring appointments. It provides:
 
 Resource Management: Load, search, sort, and display available resources
-Reservation System: Students can reserve resources for specific dates/times
+Reservation System: Students can reserve resources for specific dates
 Waiting Lists: FIFO queue system for unavailable resources
 Cancellation History: Stack-based undo functionality for recent cancellations
-Reporting: Generate usage statistics and utilization reports
-File Persistence: Load/save all data to files
 
                                                             ===== Key Features =====
 - Data Structures Used
   --> Linked Lists: Store resources and reservations
   --> Stacks: Maintain cancellation history for undo functionality
   --> Queues: Implement FIFO waiting lists per resource
-  --> Hash Maps: Quick resource ID lookups
+  --> Vector: Stores and manages the resource inventory
 
 
-  campus-resource-system/
-├── Header/                   # Header files (.h)
-│   ├── ResourceManager.h
+campus-reservation-system/
+├── include/
 │   ├── Resource.h
-│   ├── ReservationManager.h
-│   ├── WaitingListRequest.h
+│   ├── ResourceManager.h
+│   ├── Reservation.h
 │   ├── ReservationList.h
-│   ├── Reservation.h   
-│   └── CancellationHistory.h              
-├── source code/              # Implementation files (.cpp)
-│   ├── main.cpp              # Entry point
-│   ├── CancellationHistory.cpp
-│   ├── Reservation.cpp
-│   ├── ReservationList.cpp
-│   ├── ReservationManager.cpp
+│   ├── WaitingQueue.h
+│   ├── CancellationHistory.h
+│   └── ReservationManager.h
+├── src/
+│   ├── main.cpp
 │   ├── Resource.cpp
 │   ├── ResourceManager.cpp
-│   └── WaitingQueue.cpp
-├── data/                     # Data files
-│   ├── resources.txt         # Input resource data
-│   ├── reservations.txt      # Output reservations
-│   └── waiting_lists.txt     # Output waiting lists
-└── README.md                 # This file
+│   ├── Reservation.cpp
+│   ├── ReservationList.cpp
+│   ├── WaitingQueue.cpp
+│   ├── CancellationHistory.cpp
+│   └── ReservationManager.cpp
+├── data/
+│   └── resources.txt
+├── tests/
+│   └── (test files)
+└── docs/
+    └── complexity_analysis.md
 
                                                           ===== Running the Application =====
 
@@ -57,14 +56,14 @@ File Persistence: Load/save all data to files
 5. Undo Cancellation
 6. Search Reservations
 7. Sort Resources
-8. Generate Report
+8. Generate Report(Note: "Generate Report" is listed in the menu but not implemented in Milestone 1)
 9. Exit
 
                                                           ===== Naming Conventions =====
 
 
 // Classes - PascalCase
-class ReservationSystem { };
+class ReservationManager { };
 
 // Methods/Functions - camelCase
 void displayAllResources();
@@ -84,6 +83,6 @@ const string DATE_FORMAT = "YYYY-MM-DD";
 #ifndef CLASSNAME_H
 #define CLASSNAME_H
 
-// ... class declaration ...
+// 
 
 #endif // CLASSNAME_H
