@@ -40,7 +40,7 @@ campus-reservation-system/
 ├── data/
 │   └── resources.txt
 ├── tests/
-│   └── (test files)
+│   └── test_queue.cpp
 └── docs/
     └── complexity_analysis.md
 
