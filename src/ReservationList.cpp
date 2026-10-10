@@ -95,3 +95,21 @@ void ReservationList::displayReservations() const
             current = current->next;
         }
 }
+
+int ReservationList::countByResource(string resourceID) const
+{
+    int count = 0;
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.getResourceID() == resourceID)
+        {
+            count++;
+        }
+
+        current = current->next;
+    }
+
+    return count;
+}

@@ -31,6 +31,8 @@ bool reservationExists(int reservationID) const;
 bool isEmpty() const;
 
 void displayReservations() const;
+
+int countByResource(string resourceID) const;
 };
 
 #endif
