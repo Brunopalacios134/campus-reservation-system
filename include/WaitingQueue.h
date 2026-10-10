@@ -21,6 +21,7 @@ public:
     void displayWaitingList();
     bool isEmpty();
     ~WaitingQueue();
+    int countByResource(string resourceID) const;
 
 };
 #endif

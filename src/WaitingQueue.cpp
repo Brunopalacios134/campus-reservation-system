@@ -66,4 +66,17 @@ WaitingQueue::~WaitingQueue(){
         delete temp;
     }
 }
-
+int WaitingQueue::countByResource(string resourceID) const
+{
+    int count = 0;
+    WaitingRequest* current = front;
+    while (current != nullptr)
+    {
+        if (current->resourceID == resourceID)
+        {
+            count++;
+        }
+        current = current->next;
+    }
+    return count;
+}
