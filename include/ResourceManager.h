@@ -25,6 +25,8 @@ public:
     void sortByType();
 
     int getResourceCount() const;
+
+    Resource getResourceAt(int position) const;
 };
 
 #endif

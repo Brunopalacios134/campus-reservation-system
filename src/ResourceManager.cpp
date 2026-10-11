@@ -116,3 +116,10 @@ void ResourceManager::sortByType() {
 int ResourceManager::getResourceCount() const {
     return resources.size();
 }
+Resource ResourceManager::getResourceAt(int position) const {
+    if (position < 0 || position >= getResourceCount()) {
+        return Resource();
+    }
+
+    return resources[position];
+}

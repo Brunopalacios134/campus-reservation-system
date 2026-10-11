@@ -3,7 +3,7 @@
 #include "Resource.h"
 #include "ResourceManager.h"
 #include "Reservation.h"
-#include "Reservationlist.h"
+#include "ReservationList.h"
 #include "WaitingQueue.h"
 #include "CancellationHistory.h"
 #include "ReservationManager.h"
