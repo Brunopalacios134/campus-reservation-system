@@ -1,7 +1,7 @@
 #ifndef REPORTMANAGER_H
 #define REPORTMANAGER_H
 
-#include "Reservationlist.h"
+#include "ReservationList.h"
 #include "WaitingQueue.h"
 #include "ResourceManager.h"
 
