@@ -2,9 +2,56 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <algorithm>
 
 using namespace std;
+
+void mergeResources(vector<Resource>& resources, int left, int mid, int right, bool byType){
+    vector<Resource> temp;
+
+    int i = left;
+    int j = mid + 1;
+
+    while (i <= mid && j <= right){
+        string leftValue = byType
+            ? resources[i].getResourceType()
+            : resources[i].getResourceName();
+
+        string rightValue = byType
+            ? resources[j].getResourceType()
+            : resources[j].getResourceName();
+
+        if (leftValue <= rightValue){
+            temp.push_back(resources[i]);
+            i++;
+        }
+        else{
+            temp.push_back(resources[j]);
+            j++;
+        }
+    }
+    while (i <= mid){
+        temp.push_back(resources[i]);
+        i++;
+    }
+    while (j <= right){
+        temp.push_back(resources[j]);
+        j++;
+    }
+    for (int k = 0; k < static_cast<int>(temp.size()); k++){
+        resources[left + k] = temp[k];
+    }
+}
+void mergeSortResources(vector<Resource>& resources, int left, int right, bool byType){
+    if (left >= right){
+        return;
+    }
+    int mid = left + (right - left)/2;
+
+    mergeSortResources(resources,left,mid,byType);
+    mergeSortResources(resources, mid + 1,right,byType);
+
+    mergeResources(resources, left, mid, right,byType);
+}
 
 bool ResourceManager::loadFromFile(string filename) {
 
@@ -91,28 +138,17 @@ Resource* ResourceManager::search(string resourceID) {
     return nullptr;
 }
 
-void ResourceManager::sortByName() {
-
-    sort(resources.begin(),
-         resources.end(),
-         [](const Resource& a, const Resource& b) {
-
-             return a.getResourceName()
-                  < b.getResourceName();
-         });
+void ResourceManager::sortByName(){
+    if(!resources.empty()){
+        mergeSortResources(resources, 0, static_cast<int>(resources.size())-1,false);
+    }
 }
 
-void ResourceManager::sortByType() {
-
-    sort(resources.begin(),
-         resources.end(),
-         [](const Resource& a, const Resource& b) {
-
-             return a.getResourceType()
-                  < b.getResourceType();
-         });
+void ResourceManager::sortByType(){
+    if (!resources.empty()){
+        mergeSortResources(resources, 0, static_cast<int>(resources.size()) -1, true);
+    }
 }
-
 int ResourceManager::getResourceCount() const {
     return resources.size();
 }

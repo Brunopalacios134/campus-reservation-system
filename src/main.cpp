@@ -75,10 +75,18 @@ resourceManager.loadFromFile("data/resources.txt");
                     reservationManager.undoCancellation();
                     cout << "Undoing last cancellation..." << endl;
                     break;
-                case 6:
-                    cout << "Searching for reservations..." << endl;
-                    reservationList.displayReservations();
-                    break;
+                case 6:{
+                    int searchID;
+                    cout << "Enter Reservation ID to search: ";
+                    if(!(cin >> searchID)){
+                        cout << "Invalid reservation ID." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
+                    reservationList.searchAndDisplay(searchID);
+                break;
+            }
                 case 7:
                     cout << "Please make a selection." << endl; 
                     cout << "1. Sort by Name  |  2. Sort by Type" << endl;
@@ -90,6 +98,12 @@ resourceManager.loadFromFile("data/resources.txt");
                     else if(sortChoice == 2){
                         cout << "Sorting resources by TYPE..." << endl;
                         resourceManager.sortByType();
+                    }
+                    else{
+                        cout << "Invalid sorting choice." <<endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
                     }
                     resourceManager.displayAll();
                     break;
