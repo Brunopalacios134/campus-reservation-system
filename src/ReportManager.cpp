@@ -47,3 +47,36 @@ void ReportManager::displayWaitingListStatistics() const {
         cout << "No students are currently waiting." << endl;
     }
 }
+void ReportManager::displayMostRequestedResources() const {
+    int maxCount = 0;
+
+
+    for (int i = 0; i < resourceManager.getResourceCount(); i++) {
+        Resource r = resourceManager.getResourceAt(i);
+
+        int n = reservations.countByResource(r.getResourceID());
+
+        if (n > maxCount) {
+            maxCount = n;
+        }
+    }
+
+    if (maxCount == 0) {
+        cout << "No reservations have been made yet." << endl;
+        return;
+    }
+
+    cout << "Most Requested Resources" << endl;
+
+    for (int i = 0; i < resourceManager.getResourceCount(); i++) {
+        Resource r = resourceManager.getResourceAt(i);
+
+        int n = reservations.countByResource(r.getResourceID());
+
+        if (n == maxCount) {
+            cout << "ID: " << r.getResourceID()
+                 << " | Name: " << r.getResourceName()
+                 << " | Active Reservations: " << n << endl;
+        }
+    }
+}
