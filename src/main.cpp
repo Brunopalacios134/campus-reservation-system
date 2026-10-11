@@ -10,7 +10,7 @@
 #include "ReportManager.h"
 using namespace std;
     int main(){
-        int choice, sortChoice;
+        int choice;
         ResourceManager resourceManager;
         ReservationList reservationList;
         WaitingQueue waitingQueue;
@@ -43,30 +43,53 @@ resourceManager.loadFromFile("data/resources.txt");
                     cout << "Displaying available resources..." << endl;
                     resourceManager.displayAll();
                     break;
-                case 2:{
+                case 2: {
                     cout << "Opening reservation form..." << endl;
                     int newReservationID, newStudentID;
                     string newStudentName, newResourceID, newDate;
+
                     cout << "Enter Reservation ID: ";
-                    cin >> newReservationID;
+                    if (!(cin >> newReservationID)) {
+                        cout << "Invalid reservation ID." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
                     cout << "Enter Student ID: ";
-                    cin >> newStudentID;
-                    cin.ignore(); 
+                    if (!(cin >> newStudentID)) {
+                        cout << "Invalid student ID." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     cout << "Enter Student Name: ";
                     getline(cin, newStudentName);
                     cout << "Enter Resource ID: ";
                     cin >> newResourceID;
                     cout << "Enter Date: ";
                     cin >> newDate;
-                    reservationManager.createReservation(newReservationID, newStudentID, newStudentName, newResourceID, newDate);
+                    reservationManager.createReservation(
+                        newReservationID,
+                        newStudentID,
+                        newStudentName,
+                        newResourceID,
+                        newDate
+                    );
                     break;
                 }
                 case 3: {
                     int idToCancel;
                     cout << "Enter Reservation ID to cancel: ";
-                    cin >> idToCancel;
-                    reservationManager.cancelReservation(idToCancel);
+                    if (!(cin >> idToCancel)) {
+                        cout << "Invalid reservation ID." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
                     cout << "Canceling reservation..." << endl;
+                    reservationManager.cancelReservation(idToCancel);
+
                     break;
                 }
                 case 4:
@@ -89,26 +112,33 @@ resourceManager.loadFromFile("data/resources.txt");
                     reservationList.searchAndDisplay(searchID);
                 break;
             }
-                case 7:
-                    cout << "Please make a selection." << endl; 
+                case 7: {
+                    int sortChoice;
+
+                    cout << "Please make a selection." << endl;
                     cout << "1. Sort by Name  |  2. Sort by Type" << endl;
-                    cin >> sortChoice;
-                    if(sortChoice == 1){
-                        cout << "Sorting resources by NAME..." << endl; 
-                        resourceManager.sortByName();
-                    }
-                    else if(sortChoice == 2){
-                        cout << "Sorting resources by TYPE..." << endl;
-                        resourceManager.sortByType();
-                    }
-                    else{
-                        cout << "Invalid sorting choice." <<endl;
+
+                    if (!(cin >> sortChoice)) {
+                        cout << "Invalid sorting choice." << endl;
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         break;
                     }
+                    if (sortChoice == 1) {
+                        cout << "Sorting resources by NAME..." << endl;
+                        resourceManager.sortByName();
+                    }
+                    else if (sortChoice == 2) {
+                        cout << "Sorting resources by TYPE..." << endl;
+                        resourceManager.sortByType();
+                    }
+                    else {
+                        cout << "Invalid sorting choice." << endl;
+                        break;
+                    }
                     resourceManager.displayAll();
                     break;
+                }
                 case 8: {
                     int reportChoice;
 
