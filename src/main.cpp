@@ -7,6 +7,7 @@
 #include "WaitingQueue.h"
 #include "CancellationHistory.h"
 #include "ReservationManager.h"
+#include "ReportManager.h"
 using namespace std;
     int main(){
         int choice, sortChoice;
@@ -15,7 +16,8 @@ using namespace std;
         WaitingQueue waitingQueue;
         CancellationHistory cancellationHistory;
         ReservationManager reservationManager(reservationList, resourceManager, waitingQueue, cancellationHistory);
-resourceManager.loadFromFile("data/resources.txt"); 
+resourceManager.loadFromFile("data/resources.txt");
+        ReportManager reportManager(reservationList, waitingQueue, resourceManager);
         do{
             cout << "===== Campus Resource Reservation System =====" << endl;
             cout << "1. View Resources" << endl;
@@ -107,10 +109,53 @@ resourceManager.loadFromFile("data/resources.txt");
                     }
                     resourceManager.displayAll();
                     break;
-                case 8:
-                    cout << "Generating usage report..." << endl;
-                    cout << "This feature is not implemented in Milestone 1." << endl;
+                case 8: {
+                    int reportChoice;
+
+                    cout << "===== Reports Menu =====" << endl;
+                    cout << "1. Active Reservations" << endl;
+                    cout << "2. Resource Utilization" << endl;
+                    cout << "3. Most Requested Resources" << endl;
+                    cout << "4. Waiting List Statistics" << endl;
+                    cout << "5. Back" << endl;
+
+                    cout << "Enter Choice: ";
+                    cin >> reportChoice;
+
+                    if (cin.fail()) {
+                        cout << "That is not a valid number." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
+
+                    switch (reportChoice) {
+                        case 1:
+                            reportManager.displayActiveReservations();
+                            break;
+
+                        case 2:
+                            reportManager.displayResourceUtilization();
+                            break;
+
+                        case 3:
+                            reportManager.displayMostRequestedResources();
+                            break;
+
+                        case 4:
+                            reportManager.displayWaitingListStatistics();
+                            break;
+
+                        case 5:
+                            break;
+
+                        default:
+                            cout << "Invalid report choice." << endl;
+                            break;
+                    }
+
                     break;
+                }
                 case 9:
                     cout << "Exiting system." << endl;
                     break;
