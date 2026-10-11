@@ -33,6 +33,7 @@ bool isEmpty() const;
 void displayReservations() const;
 
 int countByResource(string resourceID) const;
+void searchAndDisplay(int resservationID) const;
 };
 
 #endif
