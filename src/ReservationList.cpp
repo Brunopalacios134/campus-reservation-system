@@ -113,3 +113,16 @@ int ReservationList::countByResource(string resourceID) const
 
     return count;
 }
+// Linear search  for reservation by ID
+void ReservationList::searchAndDisplay(int reservationID) const{
+    Node* current = head;
+
+    while (current != nullptr){
+        if (current->data.getReservationID() == reservationID){
+            current->data.displayReservation();
+            return;
+        }
+        current = current->next;
+    }
+    cout << "Reservation not found." << endl;
+}
